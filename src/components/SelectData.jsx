@@ -9,7 +9,7 @@ export const SelectData = ({ categoriesData }) => {
           <select className="form-select" aria-label="Default select example">
               <option defaultValue={true}>Selecciona una Categoria</option>
               { categoriesData.map( (categ) => (
-              <option value={categ.gif.id}>{ categ.name }</option>
+              <option key={categ.name} value={categ.gif.id}>{ categ.name }</option>
               ))}
           </select>
         </div>

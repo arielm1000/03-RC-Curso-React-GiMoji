@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { SelectData } from "./components/SelectData";
+import NavBar from "./components/header/NavBar";
+import Banner from "./components/header/Banner";
+import SelectCategories from "./components/ui/SelectCategories";
+import Search from "./components/ui/Search";
 
 
 const noImage = import.meta.env.VITE_NO_IMAGE;
@@ -20,38 +24,25 @@ export const Gimoji = () => {
         const resp = await fetch(`${urlApi}gifs/categories?api_key=${apiKey}`);
         const { data } = await resp.json();
         setCategories(data);
+        console.log(data);
     }
     
     
     return (
     <>
-        <header className="p-3 text-bg-dark">
-            <div className="container">
-                <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <div className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <a href="#" className="navbar-brand d-flex align-items-center">
-                            <strong>GifMoji</strong>
-                        </a>
-                    </div>
+        <NavBar />
+        <Banner />
 
-                    <div className="text-end">
-                    <button type="button" className="btn btn-outline-light me-2">Login</button>
-                    <button type="button" className="btn btn-warning">Sign-up</button>
-                    </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-sm-4">  
+                    <SelectCategories dataItem = { categories } />
+                </div>
+                <div className="col-sm-6">
+                    <Search />
                 </div>
             </div>
-        </header>
-
-        <section className="py-5 text-center container text-white">
-            <div className="row py-lg-5">
-            <div className="col-lg-6 col-md-8 mx-auto">
-                <h1 className="fw-light">Los Mejores Gif/Emoji</h1>
-                <p className="lead text-white">Busca y copia y pega los mejores gif y emojis para compartir en tus redes o proyectos.</p>
-            </div>
-            </div>
-        </section>
-
-        <SelectData categoriesData={categories}/>
+        </div>
 
         <div className="album py-5 ">
             <div className="container">

@@ -10,6 +10,7 @@ const urlApi = import.meta.env.VITE_URL_API;
 export const Gimoji = () => {
 
     const [categories, setCategories] = useState([]);
+    console.log(apiKey)
 
     useEffect(() => {
         getCategories();
@@ -20,6 +21,7 @@ export const Gimoji = () => {
         const resp = await fetch(`${urlApi}gifs/categories?api_key=${apiKey}`);
         const { data } = await resp.json();
         setCategories(data);
+        console.log(data);
     }
     
     

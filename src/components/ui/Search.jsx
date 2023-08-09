@@ -1,9 +1,15 @@
 import React from 'react';
 
-function Search() {
-    return (
+function Search({onChangeSearch} ) {
 
-     <input type="search" className=" form-control form-control-dark text-dark" placeholder="Search..." aria-label="Search"/>
+    return (
+     <input 
+        type="search" 
+        className=" form-control form-control-dark text-dark" 
+        placeholder="Search..." 
+        aria-label="Search"
+        onChange={(event) => onChangeSearch(event) }
+        />
 
     );
 }

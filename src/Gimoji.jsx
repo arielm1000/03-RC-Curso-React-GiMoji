@@ -5,6 +5,7 @@ import Banner from "./components/header/Banner";
 import SelectCategories from "./components/ui/SelectCategories";
 import Search from "./components/ui/Search";
 import GifCard from "./components/GifCard";
+import { giphyAxios } from "./components/config/AxiosGiphy";
 
 
 const apiKey = import.meta.env.VITE_APIKEY_GIPHY;
@@ -27,18 +28,34 @@ export const Gimoji = () => {
         getInit();
     }, [search]);
 
-    const getCategories = async() => {
+/*     const getCategories = async() => {
         const resp = await fetch(`${urlApi}gifs/categories?api_key=${apiKey}`);
         const { data } = await resp.json();
         setCategories(data);
         console.log(data);
     }
+ */
+    const getCategories = async() => {
+        //const resp = await fetch(`${urlApi}gifs/categories?api_key=${apiKey}`);
+        //const { data } = await resp.json();
+        const cateData = await giphyAxios.get(`gifs/categories?api_key=${apiKey}`);
+        const {data} = cateData;
+        const {data: dataCateg} = data;
+        setCategories(dataCateg);
+        //console.log(data.data);
+    }
 
-    const getInit = async() => {
+/*     const getInit = async() => {
         const resp = await fetch(`${urlApi}gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
         const { data } = await resp.json();
         setGifs(data);
         console.log(data);
+    } */
+    const getInit = async() => {
+        const {data} = await giphyAxios.get(`gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
+        const { data: searchData } = data;
+        setGifs(searchData);
+        console.log(searchData);
     }
 
     const onChanByCategories = (event) => {

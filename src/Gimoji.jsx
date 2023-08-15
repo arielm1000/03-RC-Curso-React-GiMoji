@@ -7,6 +7,7 @@ import Search from "./components/ui/Search";
 import GifCard from "./components/GifCard";
 import { giphyAxios } from "./components/config/AxiosGiphy";
 import { useFetch } from "./hooks/useFetch";
+import {Loading} from "../src/components/ui/Loading"
 
 
 const apiKey = import.meta.env.VITE_APIKEY_GIPHY;
@@ -25,11 +26,11 @@ export const Gimoji = () => {
     useEffect(() => {
         getCategories();
         getInit();
-    }, [dataCateg, search]);
+    }, [dataCateg, dataSearch]);
     
-/*     useEffect(() => {
+    useEffect(() => {
         getInit();
-    }, [search]); */
+    }, [search]);
 
     const getCategories = async() => {
         setCategories(dataCateg);
@@ -49,10 +50,10 @@ export const Gimoji = () => {
     } */
 
     const getInit = async() => {
-        const resp = await fetch(`${urlApi}gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
-        const { data } = await resp.json();
-        setGifs(data);
-        console.log(data);
+        //const resp = await fetch(`${urlApi}gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
+        //const { data } = await resp.json();
+        setGifs(dataSearch);
+        //console.log(data);
     } 
 /*     const getInit = async() => {
         const resp = await fetch(`${urlApi}gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
@@ -78,6 +79,9 @@ export const Gimoji = () => {
         if (data.length >=2) { 
             setSearch(event.target.value);
         }
+    }
+    if (isLoading) {
+        return <Loading />
     }
     
     return (

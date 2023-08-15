@@ -24,6 +24,6 @@ export const useFetch = (url) => {
     return {
         data: dataFetch,
         isLoading,
-        hasErroe: error
+        hasError: error
     }
 }

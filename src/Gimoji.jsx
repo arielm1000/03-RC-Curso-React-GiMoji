@@ -8,6 +8,7 @@ import GifCard from "./components/GifCard";
 import { giphyAxios } from "./components/config/AxiosGiphy";
 import { useFetch } from "./hooks/useFetch";
 import {Loading} from "../src/components/ui/Loading"
+import { useFetchAxios } from "./hooks/useFetchAxios";
 
 
 const apiKey = import.meta.env.VITE_APIKEY_GIPHY;
@@ -20,7 +21,8 @@ export const Gimoji = () => {
     const [gifs, setGifs] = useState([]);
     const [search, setSearch] = useState('autos');
     //console.log(apiKey)
-    const { data: dataCateg } = useFetch(`${urlApi}gifs/categories?api_key=${apiKey}`);
+    //const { data: dataCateg } = useFetch(`${urlApi}gifs/categories?api_key=${apiKey}`);
+    const { data: dataCateg } = useFetchAxios(`gifs/categories?api_key=${apiKey}`, 'get');
     const { data: dataSearch, isLoading } = useFetch(`${urlApi}gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
 
     useEffect(() => {

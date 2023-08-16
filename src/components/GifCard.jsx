@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import useLike from '../hooks/useLike';
 const noImage = import.meta.env.VITE_NO_IMAGE;
 
 export default function GifCard({dataItem}) {
-    const [like, setLike] = useState([]);
+    // const [like, setLike] = useState([]);
     const [megusta, setMegusta] = useState([]);
+    const { onClickLike, GetTotalLikesById, like} = useLike();
 
-    const onClickLike = (gifid) => {
+/*     const onClickLike = (gifid) => {
         //console.log(gifid);
         const gifExist = like.find((item) => item.id == gifid);
 
@@ -33,7 +35,7 @@ export default function GifCard({dataItem}) {
         const dataLike = like.find((item) => (item.id === gifid) );
         return dataLike ? dataLike.point : 0 ;
     }
-    const onClickMeGusta = (gifid) => {
+ */    const onClickMeGusta = (gifid) => {
         const gifExist = megusta.find((item) => item.id == gifid);
 
         if (!gifExist){ 

@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 function Search({onChangeSearch} ) {
 
+    const searchinput = useRef(null);
+
+    useEffect(() => {
+        searchinput.current.focus();
+    },[])
+
     return (
-     <input 
+     <input
+        ref={searchinput}
         type="search" 
         className=" form-control form-control-dark text-dark" 
         placeholder="Search..." 

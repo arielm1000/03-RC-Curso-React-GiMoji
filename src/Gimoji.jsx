@@ -9,6 +9,7 @@ import { giphyAxios } from "./components/config/AxiosGiphy";
 import { useFetch } from "./hooks/useFetch";
 import {Loading} from "../src/components/ui/Loading"
 import { useFetchAxios } from "./hooks/useFetchAxios";
+import { useAxiosGif } from "./hooks/useAxiosGif";
 
 
 const apiKey = import.meta.env.VITE_APIKEY_GIPHY;
@@ -24,7 +25,9 @@ export const Gimoji = () => {
     //const { data: dataCateg } = useFetch(`${urlApi}gifs/categories?api_key=${apiKey}`);
     const { data: dataCateg } = useFetchAxios(`gifs/categories?api_key=${apiKey}`, 'get');
     //const { data: dataSearch, isLoading } = useFetch(`${urlApi}gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
-    const { data: dataSearch, isLoading } = useFetchAxios(`gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
+    //const { data: dataSearch, isLoading } = useFetchAxios(`gifs/search?api_key=${apiKey}&q=${search}&limit=24&offset=0&rating=g&lang=en&bundle=messaging_non_clips`);
+    const { data: dataSearch, isLoading, onLoadMore } = useAxiosGif(search);
+
 
     useEffect(() => {
         getCategories();
@@ -86,8 +89,12 @@ export const Gimoji = () => {
     if (isLoading) {
         return <Loading />
     }
+/*     const onLoadMore = () =>
+    {
+        console.log('Cargar mas')
+    }
     
-    return (
+ */    return (
     <>
         <NavBar />
         <Banner />
@@ -108,6 +115,13 @@ export const Gimoji = () => {
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                     <GifCard dataItem={gifs} />
                 </div>
+            </div>
+            <div className="row mt-5">
+                <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={()=>onLoadMore()}
+                >CARGAR MAS</button>
             </div>
         </div>        
     </>
